@@ -12,6 +12,9 @@
         <variable
             name="Student"
             type="com.example.databinding.Student" />
+        <variable
+            name="Listner"
+            type="com.example.databinding.Listner" />
     </data>
 <LinearLayout
     android:id="@+id/main"
@@ -43,12 +46,20 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="@{Listner::onclicklistner}"
         android:enabled="@{Student.enable}"
-        android:onClickListener="@{()->Student.print()}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@={Student.name}">
+
+    </EditText>
 
 </LinearLayout>
 </layout>

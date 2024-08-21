@@ -1,6 +1,9 @@
 package com.example.databinding;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -107,6 +110,45 @@ hala2 iza 3am est3mel l recyele view nafs she ba3mel variable lal costume layout
 
 
 
+hala2 heda le 7kene molo 3ebra 3an 1 way data binding sho asde bel one way databinding eno ana hounnle 3am yseer kel ma 8ayer data mn l activity 3am tet8ayr l view le howe textview heda data esmo data
+ya3ne change of data->change in view
+
+bas haka2 badna net3lam 2end way data binding eno bel 3aks hala2 kel ma yet8ayr l view resource bada tet8ayar data ya3ne t5ayal 3ana edit text mn7ot feha ma3lomet ne7na hala2 badna kel ma tet8ayr hay l edit text badna bnaf l wa2t tet8ayr data le heye data w hay data ana 7ateta nafsa lal textview fa 7atet8ayr textview
+ya3ne t5ayal 3ana edit text 7tena feha eno heye teb3a la student.name  w 3ana textview teb3a la student.name bnafs l wa2t fa ne7na hala2 badna kel ma tet8ayr l edit text bade tet8ayr l student name w ta8yer hay l student name 7a tet8ayr l textview le heye teb3a la student name
+ya3ne bi direction ta8yer l view-->3am tet8ayar l  data le heye data le 3ande
+
+fa en7an badna na3mel 2 direction:
+bas tet8ayar l data tet8ayr l view(edit text) w bas tet8ayr l view(edittext) tet8ayr l  data
+ya3ne metl yseer synctonization been l view w data
+
+fa hala2 7a zeed edit text w 2a3teha text:@{student.name} bhay l 7ale aye ta3del 3ala l student name 7a yet8ayr text bel edit text
+la ente2l l 2 data bining le le b7aje 8ayer sha8le bel @{student.name} la 5aleha bi directional b3mela @={student.name}
+@={student.name}:houn ya3ne lama eje 7ades tetx b2lab l edit text l user y8ayro la yed7ads l name w lama eje 8ayer name la et8ayr l edit text
+
+halala2 howe bhay tare2a bas 3am n8ayer l edit text 3am yet8ayr data bas mesh 3am tbyen 3al textview ya3ne ne7na kel mara 3am nrou7 n8ayer l edit text 3am rou7 ekbous l button 3am yetb3le 3al log cat l esm le 3am 8ayro bas mesh 3am yet8ayar 3aledit text ya3ne ana l edit text w l textview tnaynetoun e5den name kel ma 8ayer l edit text lezm yet8ayr l textview kamen bas mesh 3am yezbat howe 3am tet8ayr bas lezm kel mara bas yet8ayr lezm na3mel notify la data le 3ande ya3ne la 7el hay l meshle lezm nefham sho sar:
+ne7na bas 3am n8ayer l edit text w 7aten text=@={Studne.name} bhay l 7ale bas 3am n8ayer text l b2laba l edit text 3am yen3amal call la method le esma setname le b2alb class l stiudent w 3am yet8ayar l data bas l meshkle le 3ana eno ma 3am ne3ml update lal view fa lezem kel mara bas n8ayer l edittext na3mel update lal view le e5de heda l name
+keef:
+bade est3mel interface b2lab l class l Student esmo observable heda l class bese3den la ya3mel refresh lal view keef howe l view le 2e5den name 3am ye5do b method le mawjoude bel class l student le esmo getname fa lezm ne7na 2awl ma n8ayer l edit text na3mel notify cahnge eno 2a3ml notification la be2e l view eno ntebho l data change fa 7anyrou7 yestd3e l getname w y8ayer l text
+feek heek bado yseer 2awl she bade 2a3ml extend la class l student mn l interface le esmo BaseObservable lesh l2no mn 5elel heda l class b5elene osal la function esma :
+ notifyPropertyChanged():hyde bta3mek listner bte5od integer le howe sho l property le n3mlna change ya3ne sho l property le n3ama change le heye name
+ bas heda l notifyProperychange be2olak ana be5od l get() function ta3el hay l property le n3amal change lesh l2no ne7na bel xml bas 3am n7ot Student.name 3am yestd3e l getname mesh 3am ye5od name de8re
+ ne7na 3ana class esmo Databinding le howe byen3amlo generate w mnermzlo b BR
+ BR:heda l class l BR b2labo kel l variable le 3mlta ana bel xml bya3teha id l id bekoun nafs l name l variable la kel variable menon tyeb ne7na bas 3am n7ot @{Student.name} 3am te5od l getname() metl ma 2olna w 2alak howe bel changeproperty ana be5od l get function ta3el l property l change 3ala shakl id tyeb keef bade 2a3te l get function id la 2a3tah id best3mel notation esma @Bindlable hay iza 7atyta fo2 l getname bta3mel id la hayde le property l change
+  notifyPropertyChanged() eno ntebh fe property change sho hay l property heye name tyeb keef 3am yjeeb name mn 5elel l getname w howe function change property bet5od l get() function ta3et l property change 3a shakl id 3ashen 2olo lal changeproperty eno ntebh hay l property change fa bade 3ashn l property  tbyen bel BR class bade 7ot id la hayde l property change fa bas 2a3mel notation fo2 l getname() b7ot fo2 l getname notation esma @Bindable
+  fa sa3eta bas 2a3mel BR dot 7a tbayen name l2no n7atala id la hay l roperty fa bel set name b2olo ntebh hay l property le esma name bada tet8ayr kel mara w ana bade e5od l get function ta3et hay l property fa ba3mela @bindlable fow2a 3ashn ybyen l id taba3a w ba3teha lal change property
+ notifyPropertyChanged(BR.name);:hyade bteb3at notification lal databinding eno fe 3ande data t8ayaret 2aw filed t8ayar sho howe l filed l t8yar howe le ma7toto fo2 l get function ta3olo notation @bindable
+ tyeb howe keef bsame l id le b2alb l BR:7asab esm function ta3et l get ya3ne 3ande masln esma GetName() fa howe bye5od l esm le ba3d l get w be7wela l small fa iza 7atet BR dot 7a tbyen name heda l filed le t8ayar
+ fa bedour l notifyPropertyChanged(BR.name); bero7 iza t8ayr heda l filed l name berou7 b5le kel l views le e5de heda l name yet3adal
+howe class BR generated la7alo ma3 databinding w class generated mamno3 yet3dal 3lyhoun ya3ne iza shofna fe 3ana she ssmo java (Generated) b2labo iza fat7na 7a nshof kel l files ta3wlet l databinding w 7a nshof class esmo BR b2labo l id ta3wlet l variable w l id ta3el l kel l eshya le 7aytna fo2 l getteer notation @bindable
+
+
+hala2 bhay tare2a 3mlna l bi derectional Data binding
+
+
+ba3d bade 2a3mel example 3ala l click listner eno ana bade etba3 toast
+3ala button m3yan bas ekbes fa brou7ba3mel class esmo listner msln b7ot b2lbo context w ba3mel costructor w b2labo function esma onclicklistner bte5od view  w btetba3 toast
+w ba3den brou7 3ala l xml b3ref variable mno3 heda l calss w b2lab l button l attribute le esma onclick ba3te l method le 3mlta
+berja3 bel main activity iza 3mlt bidning dot 7a tnyen method esma set listner w get lisner fa ana ba3mel object mn heda listner ba3te l cotect taba3 hyde l activity w ba3teha lal setlistner
 
 
 
@@ -146,12 +188,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
 
-
-
+        Listner listner=new Listner(this);
+        binding.setListner(listner);
 
 //        binding.setName("khaled");
 
           Student student=new Student("khaled",1,true);
           binding.setStudent(student);
     }
+
+
 }

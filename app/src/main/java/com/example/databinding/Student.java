@@ -3,7 +3,10 @@ package com.example.databinding;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Student {
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+public class Student extends BaseObservable {
     private String name;
     public int id;
     private boolean enable;
@@ -13,13 +16,15 @@ public class Student {
         this.id = id;
         this.enable = enable;
     }
-
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
+
     }
 
     public int getId() {
@@ -40,5 +45,6 @@ public class Student {
 
     public void print(){
         Log.d("Stundet","hello"+this.name);
+
     }
 }
